@@ -7,12 +7,22 @@ use Illuminate\Http\Request;
 
 class RepliesController extends Controller
 {
+    /**
+     * Create a new controller instance
+     */
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-    public function store(Thread $thread)
+    /**
+     * Persist a new reply
+     *
+     * @param $channelId
+     * @param Thread $thread
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store($channelId, Thread $thread)
     {
         $thread->addReply([
             'body' => request('body'),
