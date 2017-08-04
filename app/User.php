@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Thread;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -26,4 +27,22 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * get the rout key name for laravel
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'name';
+    }
+
+    /**
+     * get the rout key name for laravel
+     * @return string
+     */
+    public function threads()
+    {
+        return $this->hasMany(Thread::class)->latest();
+    }
 }
