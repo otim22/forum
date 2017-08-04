@@ -8,6 +8,15 @@ class Thread extends Model
 {
     protected $guarded = [];
 
+    public static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('replyCount', function ($builder){
+            $builder->withCount('replies');
+        });
+    }
+
     /**
      * @return url
      */
@@ -22,6 +31,10 @@ class Thread extends Model
     public function replies()
     {
         return $this->hasMany(Reply::class);
+    }
+
+    public function getReplyCountAttribute(){
+        return $this->replies()->count();
     }
 
     /**
