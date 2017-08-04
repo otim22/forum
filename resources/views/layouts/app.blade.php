@@ -8,10 +8,17 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Forum') }}</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <style>
+        body { padding-bottom: 100px }
+        .level { display: flex; align-items: center }
+        .flex { flex: 1 }
+    </style>
+
 </head>
 <body style="padding-bottom: 100px;">
     <div id="app">
@@ -44,11 +51,14 @@
                                 <li>
                                     <a href="/threads">All Threads</a>
                                 </li>
+                                
                                 <li>
                                     @if (auth()->check())
                                         <a href="/threads?by={{ auth()->user()->name }}">My Threads</a>
                                     @endif
                                 </li>
+
+                                <li><a href="/threads?popular=1">Popular Threads</a></li>
                             </ul>
                         </li>
 
