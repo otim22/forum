@@ -38,8 +38,8 @@ class FavoritesTest extends TestCase
         $reply = create('App\Reply');
 
         try {
-        $this->post('replies/' .$reply->id. '/favorites');
-        $this->post('replies/' .$reply->id. '/favorites');
+            $this->post('replies/' .$reply->id. '/favorites');
+            $this->post('replies/' .$reply->id. '/favorites');
         } catch (\ErrorException $e) {
             $this->fail('Did not expect to insert the same record set twice');
         }
