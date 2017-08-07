@@ -6,10 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Thread extends Model
 {
+    use RecordsActivity;
+
     protected $guarded = [];
     protected $with = ['creator', 'channel'];
 
 
+    /**
+     *
+     */
     public static function boot()
     {
         parent::boot();
@@ -22,6 +27,7 @@ class Thread extends Model
             $thread->replies()->delete();
         });
     }
+
 
     /**
      * @return url

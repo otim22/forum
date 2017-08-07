@@ -40,7 +40,6 @@ $factory->define(App\Channel::class, function ($faker){
     $name = $faker->word;
 
     return [
-
         'name' => $name,
         'slug' => $name
     ];
@@ -49,7 +48,7 @@ $factory->define(App\Channel::class, function ($faker){
 $factory->define(App\Reply::class, function ($faker){
     return [
         'thread_id' => function(){
-            return factory('App\User')->create()->id;
+            return factory('App\Thread')->create()->id;
         },
         'user_id' => function(){
             return factory('App\User')->create()->id;
