@@ -11,7 +11,13 @@
     <title>{{ config('app.name', 'Forum') }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+
+    <script>
+        window.Laravel = <?php echo json_encode([
+            'csrfToken' => csrf_token(),
+        ]); ?>
+    </script>
 
     <style>
         body { padding-bottom: 100px }
@@ -20,14 +26,16 @@
     </style>
 
 </head>
-<body style="padding-bottom: 100px;">
+<body>
     <div id="app">
         @include('layouts.nav')
 
         @yield('content')
+
+        <flash message="{{ session('flash') }}"></flash>
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ mix('js/app.js') }}"></script>
 </body>
 </html>
