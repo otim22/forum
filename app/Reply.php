@@ -26,4 +26,12 @@ class Reply extends Model
     {
         return $this->belongsTo(Thread::class);
     }
+
+    /**
+     * @return mixed
+     */
+    public function path()
+    {
+        return $this->thread->path() . "#reply-{$this->id}";
+    }
 }

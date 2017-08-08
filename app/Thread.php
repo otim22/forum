@@ -9,7 +9,7 @@ class Thread extends Model
     use RecordsActivity;
 
     protected $guarded = [];
-    protected $with = ['creator', 'channel'];
+    protected $with = [];
 
 
     /**
@@ -73,6 +73,11 @@ class Thread extends Model
         return $this->replies()->create($reply);
     }
 
+    /**
+     * @param $query
+     * @param $filters
+     * @return mixed
+     */
     public function scopeFilter($query, $filters){
         return $filters->apply($query);
     }
