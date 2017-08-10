@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use App\Channel;
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -15,12 +14,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer('*', function($view){
-            $channel = \Cache::rememberForever('channels', function (){
+        \View::composer('*', function ($view) {
+            $channels = \Cache::rememberForever('channels', function () {
                 return Channel::all();
             });
-            $view->with('channels', $channel);
+
+            $view->with('channels', $channels);
         });
+
+        \Validator::extend('spamfree', 'App\Rules\SpamFree@passes');
     }
 
     /**

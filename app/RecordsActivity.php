@@ -1,38 +1,42 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: fredrickotim
- * Date: 2017-08-07
- * Time: 1:44 PM
- */
 
 namespace App;
 
 
 trait RecordsActivity
 {
+    /**
+     * Boot the trait.
+     */
     protected static function bootRecordsActivity()
     {
         if (auth()->guest()) return;
 
         foreach (static::getActivitiesToRecord() as $event) {
-            static::$event(function ($model) use ($event){
-               $model->recordActivity($event);
+            static::$event(function ($model) use ($event) {
+                $model->recordActivity($event);
             });
         }
 
-        static::deleting(function ($model){
-           $model->activity()->delete();
+        static::deleting(function ($model) {
+            $model->activity()->delete();
         });
     }
 
+    /**
+     * Fetch all model events that require activity recording.
+     *
+     * @return array
+     */
     protected static function getActivitiesToRecord()
     {
         return ['created'];
     }
 
     /**
-     * @param $event
+     * Record new activity for the model.
+     *
+     * @param string $event
      */
     protected function recordActivity($event)
     {
@@ -43,7 +47,9 @@ trait RecordsActivity
     }
 
     /**
-     * @return mixed
+     * Fetch the activity relationship.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
     public function activity()
     {
@@ -51,7 +57,9 @@ trait RecordsActivity
     }
 
     /**
-     * @param $event
+     * Determine the activity type.
+     *
+     * @param  string $event
      * @return string
      */
     protected function getActivityType($event)

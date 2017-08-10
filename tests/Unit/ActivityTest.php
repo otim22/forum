@@ -4,8 +4,8 @@ namespace Tests\Feature;
 
 use App\Activity;
 use Carbon\Carbon;
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Tests\TestCase;
 
 class ActivityTest extends TestCase
 {
@@ -31,7 +31,7 @@ class ActivityTest extends TestCase
     }
 
     /** @test */
-    public function it_records_activity_when_a_reply_is_created()
+    function it_records_activity_when_a_reply_is_created()
     {
         $this->signIn();
 
@@ -41,7 +41,7 @@ class ActivityTest extends TestCase
     }
 
     /** @test */
-    public function it_fetches_a_feed_for_any_user()
+    function it_fetches_a_feed_for_any_user()
     {
         $this->signIn();
 
